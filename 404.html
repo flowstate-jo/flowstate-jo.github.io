@@ -18,7 +18,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/styles.css">
-  <script>document.documentElement.classList.add('js');</script>
+  <script>
+    document.documentElement.classList.add('js');
+    /* Older browsers cannot animate between pages by themselves: mark them so the stylesheet fades the page in instead */
+    if (!('CSSViewTransitionRule' in window)) { document.documentElement.classList.add('no-vt'); }
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>

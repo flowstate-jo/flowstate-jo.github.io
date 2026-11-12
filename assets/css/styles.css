@@ -23,6 +23,7 @@
    11. Voice recorder
    12. Footer
    13. Small extras ([CONFIRM] highlight, 404 page, reduced motion)
+   14. Page transitions (moving between Home, Careers, FAQ and Contact)
    ========================================================================== */
 
 
@@ -55,6 +56,10 @@
   --radius-small: 10px;            /* roundness of form fields                */
   --page-width: 1140px;            /* maximum width of the page content       */
   --header-height: 68px;
+
+  /* Page transitions: how long the fade between pages takes.
+     0.3s is quick and smooth; try 0.5s for slower, 0.2s for snappier. */
+  --page-transition-time: 0.3s;
 }
 
 
@@ -450,6 +455,27 @@ strong {
   text-decoration-color: var(--color-accent);
   text-decoration-thickness: 3px;
   text-underline-offset: 0.45em;
+}
+
+/* On wide screens the yellow line is its own small bar, so it can glide from
+   one menu item to the next when the page changes (see section 14). */
+@media (min-width: 860px) {
+  .site-nav a[aria-current="page"] {
+    position: relative;
+    text-decoration: none;
+  }
+
+  .site-nav a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 0.85rem;
+    right: 0.85rem;
+    bottom: 0.15rem;
+    height: 3px;
+    border-radius: 3px;
+    background: var(--color-accent);
+    view-transition-name: nav-indicator;
+  }
 }
 
 .header-actions {
@@ -1775,4 +1801,67 @@ mark.confirm:empty {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+
+/* ==========================================================================
+   14. PAGE TRANSITIONS
+   --------------------------------------------------------------------------
+   When a visitor moves between Home, Careers, FAQ and Contact:
+     - the old page fades out and the new page fades in, sliding up slightly
+     - the header stays still
+     - on wide screens the yellow line under the menu glides to the new page
+
+   SPEED: change --page-transition-time at the top of this file.
+   SWITCH OFF: delete this whole section.
+
+   How it works: modern browsers animate between pages themselves ("view
+   transitions"). Older browsers get a simple fade-in instead (the ".no-vt"
+   rule at the end). Visitors who have asked their device for less animation
+   get neither.
+   ========================================================================== */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+
+/* The header is the same on every page, so it keeps its place */
+.site-header {
+  view-transition-name: site-header;
+}
+
+/* The page content: the old page leaves, then the new page arrives */
+::view-transition-old(root) {
+  animation: page-leave calc(var(--page-transition-time) * 0.6) ease-in both;
+}
+
+::view-transition-new(root) {
+  animation: page-enter var(--page-transition-time) ease-out calc(var(--page-transition-time) * 0.3) both;
+}
+
+/* The yellow line under the menu glides for the same length of time */
+::view-transition-group(nav-indicator) {
+  animation-duration: var(--page-transition-time);
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes page-leave {
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+/* Older browsers (the "no-vt" label is added by a tiny script in each page's
+   <head>): simply fade the new page in. */
+.no-vt main {
+  animation: page-enter calc(var(--page-transition-time) * 1.3) ease-out both;
 }
