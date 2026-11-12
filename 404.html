@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- This page is shown automatically when someone opens an address that does not exist. -->
+  <title>Page not found | Flow State</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#000000">
+
+  <!-- ICONS -->
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+
+  <!-- FONT (free, from Google Fonts) + STYLES -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- ======================================================================
+       HEADER — this block is the same on every page.
+       If you change it here, make the same change in the other .html files.
+       ====================================================================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <!-- LOGO: to use your own file, replace assets/img/logo-mark.png (keep the same name) -->
+      <a class="brand" href="index.html">
+        <img src="assets/img/logo-mark.png" alt="" width="279" height="160">
+        <span class="brand-name">Flow State</span>
+      </a>
+
+      <nav id="site-nav" class="site-nav" aria-label="Main menu">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a class="btn btn-primary btn-small" href="careers.html#apply"><span>Apply<span class="hide-narrow"> Now</span></span></a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+          <span class="nav-toggle-bars" aria-hidden="true"></span>
+          <span class="visually-hidden">Menu</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="bg-grid">
+    <section class="container not-found">
+      <div>
+        <p class="big" aria-hidden="true">404</p>
+        <h1>Page not found</h1>
+        <p class="lead" style="margin-inline: auto;">Sorry, we couldn’t find that page. It may have been moved, or the link may be wrong.</p>
+        <div class="btn-row" style="justify-content: center; margin-top: 1.75rem;">
+          <a class="btn btn-primary" href="index.html">Go to the home page</a>
+          <a class="btn btn-ghost" href="careers.html">See the open role</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ======================================================================
+       FOOTER — this block is the same on every page.
+       If you change a link here, change it in the other .html files too.
+       ====================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="assets/img/logo-mark.png" alt="Flow State" width="279" height="160" loading="lazy">
+          <p>B2B sales outsourcing, based in Amman, Jordan. We pitch and sell our clients’ products to US businesses.</p>
+        </div>
+
+        <nav aria-label="Footer menu">
+          <h2>Explore</h2>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="careers.html">Careers</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div>
+          <h2>Follow us</h2>
+          <ul class="footer-links">
+            <!-- SOCIAL LINKS: change the addresses inside href="..." -->
+            <li>
+              <a href="https://www.linkedin.com/company/flow-stateos" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><circle cx="5" cy="5.5" r="2.25"/><path d="M3 9.5h4V21H3z"/><path d="M9.5 9.5h3.8v1.7c.7-1.2 2.1-2 3.9-2 3.3 0 4.3 2.1 4.3 5.3V21h-4v-5.6c0-1.6-.5-2.6-1.9-2.6-1.5 0-2.1 1.1-2.1 2.7V21h-4z"/></svg>
+                LinkedIn<span class="visually-hidden"> (opens in a new tab)</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/flowstate.jo/" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
+                Instagram<span class="visually-hidden"> (opens in a new tab)</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© <span data-year>2026</span> Flow State · Amman, Jordan</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

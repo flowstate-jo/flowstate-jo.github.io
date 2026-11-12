@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- PAGE TITLE + DESCRIPTION (shown in Google results and browser tabs) -->
+  <title>Contact Flow State — Amman, Jordan</title>
+  <meta name="description" content="Get in touch with Flow State, a B2B sales outsourcing company based in Amman, Jordan. Send us a message and we'll get back to you.">
+  <meta name="theme-color" content="#000000">
+
+  <!-- LINK PREVIEW (optional: replace YOUR-SITE-ADDRESS after the site is live — see README) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Flow State">
+  <meta property="og:title" content="Contact Flow State">
+  <meta property="og:description" content="B2B sales outsourcing based in Amman, Jordan. Send us a message.">
+  <meta property="og:image" content="https://YOUR-SITE-ADDRESS/assets/img/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- ICONS -->
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+
+  <!-- FONT (free, from Google Fonts) + STYLES -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- ======================================================================
+       HEADER — this block is the same on every page.
+       If you change it here, make the same change in the other .html files.
+       ====================================================================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <!-- LOGO: to use your own file, replace assets/img/logo-mark.png (keep the same name) -->
+      <a class="brand" href="index.html">
+        <img src="assets/img/logo-mark.png" alt="" width="279" height="160">
+        <span class="brand-name">Flow State</span>
+      </a>
+
+      <nav id="site-nav" class="site-nav" aria-label="Main menu">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="contact.html" aria-current="page">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a class="btn btn-primary btn-small" href="careers.html#apply"><span>Apply<span class="hide-narrow"> Now</span></span></a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+          <span class="nav-toggle-bars" aria-hidden="true"></span>
+          <span class="visually-hidden">Menu</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ====================== PAGE TITLE ====================== -->
+    <section class="page-hero bg-grid">
+      <div class="container">
+        <p class="eyebrow">Contact us</p>
+        <h1>Let’s talk</h1>
+        <p class="lead">Have a question about working with us, or want Flow State to sell your product in the US? Send us a message.</p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 1rem;">
+      <div class="container contact-layout">
+
+        <!-- ====================== CONTACT FORM ======================
+             Sent to your Google Apps Script (see google-apps-script/README.md).
+             You can edit the visible wording. Please do NOT change anything
+             inside  id="..."  or  name="..."  -->
+        <div>
+          <div id="form-not-connected" class="notice notice-error" role="alert" hidden></div>
+
+          <noscript>
+            <div class="notice notice-error">
+              This form needs JavaScript. Please switch JavaScript on in your browser,
+              or email us at <a href="mailto:austin@velarya.com">austin@velarya.com</a>.
+            </div>
+          </noscript>
+
+          <form id="contact-form" class="form-card" novalidate>
+            <h2 style="font-size: 1.25rem;">Send us a message</h2>
+            <p class="muted" style="margin-bottom: 1.5rem;">All fields are required.</p>
+
+            <!-- Spam trap: hidden from real visitors. Leave as it is. -->
+            <div class="hp-field" aria-hidden="true">
+              <label for="contact-favorite-color">Leave this field empty</label>
+              <input type="text" id="contact-favorite-color" name="favorite_color" tabindex="-1" autocomplete="off">
+            </div>
+
+            <div class="field">
+              <label for="name">Your name</label>
+              <input class="input" type="text" id="name" name="name" autocomplete="name" maxlength="100" required aria-describedby="name-error">
+              <p class="field-error" id="name-error" hidden></p>
+            </div>
+
+            <div class="field">
+              <label for="email">Email address</label>
+              <input class="input" type="email" id="email" name="email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" maxlength="120" required aria-describedby="email-error">
+              <p class="field-error" id="email-error" hidden></p>
+            </div>
+
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea class="input" id="message" name="message" rows="6" maxlength="3000" required aria-describedby="message-error"></textarea>
+              <p class="field-error" id="message-error" hidden></p>
+            </div>
+
+            <div class="form-actions">
+              <div id="contact-status" class="notice" hidden></div>
+              <button type="submit" class="btn btn-primary btn-large" id="contact-submit">Send message</button>
+            </div>
+          </form>
+
+          <!-- Shown after the message has been sent successfully -->
+          <div id="contact-success" class="success-panel" tabindex="-1" hidden>
+            <div class="success-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>
+            </div>
+            <h2>Message sent</h2>
+            <p>Thank you<span id="success-name"></span>! We’ve received your message and will get back to you as soon as we can.</p>
+            <div class="btn-row" style="justify-content: center; margin-top: 1.5rem;">
+              <a class="btn btn-ghost" href="index.html">Back to home</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ====================== LOCATION + DETAILS ====================== -->
+        <aside class="panel contact-info" aria-labelledby="find-us">
+          <h2 id="find-us">Where to find us</h2>
+          <dl class="facts">
+            <div>
+              <dt>Location</dt>
+              <dd>Amman, Jordan</dd>
+            </div>
+            <div>
+              <dt>Email</dt>
+              <dd><a href="mailto:austin@velarya.com">austin@velarya.com</a></dd>
+            </div>
+            <div>
+              <dt>Follow us</dt>
+              <dd>
+                <a href="https://www.linkedin.com/company/flow-stateos" target="_blank" rel="noopener noreferrer">LinkedIn<span class="visually-hidden"> (opens in a new tab)</span></a>
+                &nbsp;·&nbsp;
+                <a href="https://www.instagram.com/flowstate.jo/" target="_blank" rel="noopener noreferrer">Instagram<span class="visually-hidden"> (opens in a new tab)</span></a>
+              </dd>
+            </div>
+          </dl>
+          <p class="muted" style="margin-bottom: 1rem;">Looking for a job? Please use the application form — it goes straight to our hiring team.</p>
+          <a class="btn btn-primary" href="careers.html#apply" style="width: 100%;">Apply Now</a>
+        </aside>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======================================================================
+       FOOTER — this block is the same on every page.
+       If you change a link here, change it in the other .html files too.
+       ====================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="assets/img/logo-mark.png" alt="Flow State" width="279" height="160" loading="lazy">
+          <p>B2B sales outsourcing, based in Amman, Jordan. We pitch and sell our clients’ products to US businesses.</p>
+        </div>
+
+        <nav aria-label="Footer menu">
+          <h2>Explore</h2>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="careers.html">Careers</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div>
+          <h2>Follow us</h2>
+          <ul class="footer-links">
+            <!-- SOCIAL LINKS: change the addresses inside href="..." -->
+            <li>
+              <a href="https://www.linkedin.com/company/flow-stateos" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><circle cx="5" cy="5.5" r="2.25"/><path d="M3 9.5h4V21H3z"/><path d="M9.5 9.5h3.8v1.7c.7-1.2 2.1-2 3.9-2 3.3 0 4.3 2.1 4.3 5.3V21h-4v-5.6c0-1.6-.5-2.6-1.9-2.6-1.5 0-2.1 1.1-2.1 2.7V21h-4z"/></svg>
+                LinkedIn<span class="visually-hidden"> (opens in a new tab)</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/flowstate.jo/" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
+                Instagram<span class="visually-hidden"> (opens in a new tab)</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© <span data-year>2026</span> Flow State · Amman, Jordan</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/config.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/form-helpers.js" defer></script>
+  <script src="assets/js/contact.js" defer></script>
+</body>
+</html>
