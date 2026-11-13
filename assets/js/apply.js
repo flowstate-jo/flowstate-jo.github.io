@@ -1,6 +1,6 @@
 /* ============================================================================
    FLOW STATE — apply.js
-   Runs the application form on careers.html:
+   Runs the application form on a job page (for example job-remote-sales-rep.html):
      1. Prepares the form (country codes, date limits, recorder)
      2. Checks every field and shows clear error messages
      3. Sends the application (with the CV and the recording) to Google Apps Script

@@ -17,7 +17,7 @@
     5. Header and menu
     6. Home page hero ("Find your flow")
     7. Sections, cards, steps
-    8. Careers page (job description)
+    8. Careers (list of open roles, job pages)
     9. FAQ accordion
    10. Forms
    11. Voice recorder
@@ -235,10 +235,12 @@ strong {
   gap: 0.6rem;
   margin: 0 0 0.9rem;
   color: var(--color-accent);
+  font-family: var(--font-body);
   font-size: 0.8rem;
   font-weight: 700;
   font-stretch: 112%;
   letter-spacing: 0.16em;
+  line-height: 1.65;               /* same height whether it is a paragraph or a heading */
   text-transform: uppercase;
 }
 
@@ -448,8 +450,8 @@ strong {
   color: var(--color-text);
 }
 
-/* The page you are currently on */
-.site-nav a[aria-current="page"] {
+/* The page you are currently on (a job page keeps "Careers" marked) */
+.site-nav a[aria-current] {
   color: var(--color-text);
   text-decoration: underline;
   text-decoration-color: var(--color-accent);
@@ -460,12 +462,12 @@ strong {
 /* On wide screens the yellow line is its own small bar, so it can glide from
    one menu item to the next when the page changes (see section 14). */
 @media (min-width: 860px) {
-  .site-nav a[aria-current="page"] {
+  .site-nav a[aria-current] {
     position: relative;
     text-decoration: none;
   }
 
-  .site-nav a[aria-current="page"]::after {
+  .site-nav a[aria-current]::after {
     content: "";
     position: absolute;
     left: 0.85rem;
@@ -596,38 +598,11 @@ strong {
    6. HOME PAGE HERO  ("Find your flow")
    ========================================================================== */
 .hero {
-  position: relative;
-  overflow: hidden;
   padding-block: clamp(2.5rem, 7vw, 5.5rem) clamp(2.5rem, 7vw, 5rem);
 }
 
 .hero-content {
-  position: relative;
-  z-index: 1;
   max-width: 40rem;
-}
-
-/* "Now hiring" pill */
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  margin: 0 0 1.5rem;
-  padding: 0.4rem 0.9rem 0.4rem 0.75rem;
-  border: 1px solid #3a3a3a;
-  border-radius: 999px;
-  background: rgba(0, 0, 0, 0.6);
-  font-size: 0.85rem;
-  font-weight: 600;
-}
-
-.badge::before {
-  content: "";
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--color-accent);
-  box-shadow: 0 0 0 4px rgba(249, 189, 16, 0.22);
 }
 
 .hero-title {
@@ -682,40 +657,151 @@ strong {
   line-height: 1.35;
 }
 
-/* The white wave ribbons */
-.hero-waves {
-  display: block;
-  width: 118%;
-  max-width: none;
-  margin: 2rem -1.25rem -0.5rem auto;
-  color: #ffffff;
+/* "What we do": under the hero text on phones, beside it on wide screens */
+.hero-about {
+  margin-top: 2.75rem;
+  padding-top: 2.25rem;
+  border-top: 1px solid #2a2a2a;
 }
 
-.wave {
-  animation: wave-drift 9s ease-in-out infinite alternate;
+.hero-about .lead {
+  margin-bottom: 1.25rem;
+  font-size: 1.08rem;
 }
 
-.wave-2 { animation-duration: 11s; animation-delay: -3s; }
-.wave-3 { animation-duration: 7s; animation-delay: -1.5s; }
-.wave-4 { animation-duration: 12s; animation-delay: -5s; }
-
-@keyframes wave-drift {
-  from { transform: translate(0, 4px); }
-  to   { transform: translate(-10px, -6px); }
+/* The three numbered boxes (01, 02, 03), one under the other */
+.about-cards {
+  display: grid;
+  gap: 0.75rem;
 }
 
+.about-cards .card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 1rem;
+  height: auto;
+  padding: 1.1rem 1.25rem;
+}
+
+.about-cards .card-number {
+  grid-row: 1 / span 2;
+  margin: 0.2rem 0 0;
+}
+
+.about-cards .card h3 {
+  margin-bottom: 0.3rem;
+}
+
+.about-cards .card p {
+  grid-column: 2;
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+/* Wide screens: "Find your flow" on the left, "What we do" on the right */
 @media (min-width: 960px) {
-  .hero-content {
-    max-width: min(36rem, 52%);
+  .hero-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: clamp(2rem, 4vw, 3.5rem);
+    align-items: center;
   }
 
-  .hero-waves {
-    position: absolute;
-    top: 42%;
-    right: -4vw;
-    width: min(50vw, 780px);
-    margin: 0;
-    transform: translateY(-50%);
+  .hero-content {
+    max-width: none;
+  }
+
+  /* On smaller laptops the left half is narrow, so the big words shrink a little to fit */
+  .hero-title {
+    font-size: min(5.4rem, 7.6vw);
+  }
+
+  .hero-about {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+}
+
+/* "Now hiring": a short summary of the open job.
+   It is hidden unless the screen is very wide (see the block after this one). */
+.hero-role {
+  display: none;
+}
+
+.card.role-spotlight {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  height: auto;
+}
+
+.card.role-spotlight h3 {
+  margin-bottom: 0;
+  font-size: 1.25rem;
+}
+
+/* The big yellow figure: "3,000+ JOD" */
+.role-spotlight .role-pay {
+  margin: 1rem 0;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #262626;
+}
+
+.role-pay strong {
+  display: block;
+  color: var(--color-accent);
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 1.7vw, 2.1rem);
+  font-weight: 900;
+  font-stretch: 125%;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.role-pay span {
+  display: block;
+  margin-top: 0.45rem;
+}
+
+.role-spotlight .check-list {
+  margin-bottom: 1.1rem;
+  font-size: 0.98rem;
+}
+
+.role-spotlight .btn {
+  margin-top: auto;              /* keeps the button at the bottom of the box */
+}
+
+.role-spotlight .btn svg {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+}
+
+/* Very wide screens (big monitors): the rest of the page stays in the middle,
+   which used to leave an empty area to the right of "What we do". Here the top
+   section keeps its left edge but runs further to the right, and the
+   "Now hiring" box appears as a third column in that area. */
+@media (min-width: 1600px) {
+  .hero-layout {
+    width: auto;
+    max-width: 1800px;
+    margin-left: calc((100% - var(--page-width)) / 2);
+    margin-right: 0;
+    padding-right: clamp(1.5rem, 2.5vw, 3rem);
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.61fr);
+  }
+
+  .hero-side {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 0.66fr);
+    gap: clamp(1.5rem, 2.2vw, 2.5rem);
+  }
+
+  .hero-role {
+    display: flex;
+    flex-direction: column;
   }
 }
 
@@ -932,8 +1018,328 @@ strong {
 
 
 /* ==========================================================================
-   8. CAREERS PAGE (job description)
+   8. CAREERS  (the list of open roles, and each job's own page)
    ========================================================================== */
+
+/* ---------- The list of open roles (careers.html) ---------- */
+
+/* The "1 open role" line above the list, with a thin line running to the right */
+.roles-count {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 0 1.25rem;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 800;
+  font-stretch: 118%;
+  letter-spacing: 0.12em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.roles-count::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.role-list {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: role;             /* numbers the jobs 01, 02, 03… by itself  */
+}
+
+/* One job in the list. The whole box is clickable (see .role-link below).
+   Phones: everything is stacked. Wide screens: number, text and button sit
+   side by side (see the "min-width: 800px" block further down). */
+.role-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    "number  labels"
+    "title   title"
+    "summary summary"
+    "facts   facts"
+    "button  button";
+  column-gap: 0.85rem;
+  padding: clamp(1.25rem, 4vw, 2rem);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  counter-increment: role;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.role-card:hover {
+  border-color: var(--color-accent);
+  background: #111111;
+}
+
+/* The yellow number: 01, 02, 03… */
+.role-card::before {
+  content: counter(role, decimal-leading-zero);
+  grid-area: number;
+  align-self: center;
+  color: var(--color-accent);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 900;
+  font-stretch: 125%;
+  letter-spacing: 0.06em;
+  line-height: 1;
+}
+
+/* Small labels above the job title: "Hiring now / Sales" */
+.role-labels {
+  grid-area: labels;
+  align-self: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.3rem 0.7rem;
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.role-labels span + span::before {
+  content: "/";
+  margin-right: 0.7rem;
+  color: #5c5c5c;
+}
+
+/* "Hiring now" with its yellow dot */
+.role-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--color-text);
+}
+
+.role-status::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow: 0 0 0 4px rgba(249, 189, 16, 0.22);
+}
+
+.role-title {
+  grid-area: title;
+  margin: 0.9rem 0 0.5rem;
+  font-size: clamp(1.5rem, 5.4vw, 2.1rem);
+}
+
+/* The job title is the link. Its invisible "::after" layer covers the whole
+   box, so a click or tap anywhere on the box opens the job. */
+.role-link {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.role-link:hover {
+  color: var(--color-text);
+}
+
+.role-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: var(--radius);
+}
+
+.role-summary {
+  grid-area: summary;
+  max-width: 40rem;
+  margin: 0 0 1.1rem;
+  color: var(--color-text-muted);
+}
+
+.role-card .chips {
+  grid-area: facts;
+  margin: 0;
+}
+
+/* The "View role" button. It is part of the clickable box, not a separate link. */
+.role-cta {
+  grid-area: button;
+  margin-top: 1.5rem;
+}
+
+.role-cta svg {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s ease;
+}
+
+.role-card:hover .role-cta {
+  background: var(--color-accent-hover);
+}
+
+.role-card:hover .role-cta svg {
+  transform: translateX(4px);
+}
+
+/* Keyboard focus: outline the whole box, not just the job title */
+@supports selector(:has(a)) {
+  .role-link:focus-visible {
+    outline: none;
+  }
+
+  .role-card:has(.role-link:focus-visible) {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 3px;
+  }
+}
+
+@media (min-width: 800px) {
+  .role-card {
+    grid-template-columns: 3.5rem minmax(0, 1fr) auto;
+    grid-template-areas:
+      "number labels  button"
+      "number title   button"
+      "number summary button"
+      "number facts   button";
+    column-gap: 1.5rem;
+  }
+
+  .role-card::before {
+    align-self: start;
+    font-size: 1.9rem;
+  }
+
+  .role-title {
+    margin-top: 0.65rem;
+  }
+
+  .role-cta {
+    align-self: center;
+    margin-top: 0;
+  }
+}
+
+/* ---------- A closed role ----------
+   Shown for information only: greyed out, smaller, with no page of its own.
+   In careers.html it is a job block with the extra word "is-closed". */
+.role-card.is-closed,
+.role-card.is-closed:hover {
+  padding-block: clamp(1rem, 3vw, 1.35rem);
+  border-color: #1f1f1f;
+  background: #070707;
+}
+
+.role-card.is-closed::before {
+  color: #7a7a7a;                  /* grey number instead of yellow */
+}
+
+.is-closed .role-status {
+  color: var(--color-text-muted);
+}
+
+.is-closed .role-status::before {
+  border: 2px solid #7a7a7a;       /* an empty grey ring instead of the yellow dot */
+  background: transparent;
+  box-shadow: none;
+}
+
+.is-closed .role-title {
+  margin: 0.6rem 0 0.25rem;
+  color: #a6a6a6;
+  font-size: clamp(1.15rem, 4.2vw, 1.45rem);
+}
+
+.is-closed .role-summary {
+  margin-bottom: 0;
+  color: #9a9a9a;
+  font-size: 0.98rem;
+}
+
+/* The grey "Closed" tag on the right (wide screens only; on phones the small
+   "Closed" label above the job title already says it) */
+.role-closed-tag {
+  display: none;
+}
+
+@media (min-width: 800px) {
+  .role-closed-tag {
+    grid-area: button;
+    align-self: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 0.4rem 1.3rem;
+    border: 1.5px solid #3a3a3a;
+    border-radius: 999px;
+    color: #9a9a9a;
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    font-weight: 800;
+    font-stretch: 112%;
+    letter-spacing: 0.08em;
+    line-height: 1.1;
+    text-transform: uppercase;
+  }
+}
+
+/* Dashed box under the last job: an empty place where the next role will go */
+.role-empty {
+  margin: 1rem 0 0;
+  padding: 1.1rem clamp(1.25rem, 4vw, 2rem);
+  border: 1.5px dashed #3a3a3a;
+  border-radius: var(--radius);
+  color: var(--color-text-muted);
+}
+
+.roles-help {
+  margin: 1.75rem 0 0;
+  color: var(--color-text-muted);
+}
+
+/* ---------- A job's own page (for example job-remote-sales-rep.html) ---------- */
+
+/* "All open roles" link at the top of a job page */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 36px;
+  margin-bottom: 1.1rem;
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  color: var(--color-accent);
+}
+
+.back-link svg {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s ease;
+}
+
+.back-link:hover svg {
+  transform: translateX(-3px);
+}
+
 .job-layout {
   display: grid;
   gap: 2rem;
@@ -1017,10 +1423,16 @@ strong {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-small);
   background: var(--color-surface);
+  transition: border-color 0.3s ease;
 }
 
 .faq-item[open] {
   border-color: #4a4a4a;
+}
+
+/* "is-closing" is added by main.js for the moment a question is sliding shut */
+.faq-item.is-closing {
+  border-color: var(--color-border);
 }
 
 .faq-item summary {
@@ -1044,7 +1456,8 @@ strong {
   color: var(--color-accent);
 }
 
-/* The + / − sign */
+/* The + / − sign. When a question opens, the sign turns and its upright bar
+   shrinks away, so the + becomes a −. */
 .faq-item summary::after {
   content: "";
   flex: 0 0 auto;
@@ -1053,16 +1466,30 @@ strong {
   background:
     linear-gradient(var(--color-accent), var(--color-accent)) center / 100% 2.5px no-repeat,
     linear-gradient(var(--color-accent), var(--color-accent)) center / 2.5px 100% no-repeat;
+  transition: transform 0.3s ease, background-size 0.3s ease;
 }
 
-.faq-item[open] summary::after {
-  background:
-    linear-gradient(var(--color-accent), var(--color-accent)) center / 100% 2.5px no-repeat;
+.faq-item[open]:not(.is-closing) summary::after {
+  background-size: 100% 2.5px, 2.5px 0;
+  transform: rotate(180deg);
 }
 
 .faq-answer {
   padding: 0 1.2rem 1.15rem;
   color: #dddddd;
+}
+
+/* Opening a question: the answer fades in and settles into place.
+   The box itself glides open and shut — that part is done by assets/js/main.js. */
+.faq-item[open] .faq-answer {
+  animation: faq-answer-in 0.35s ease both;
+}
+
+@keyframes faq-answer-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
 }
 
 .faq-answer > :last-child {
